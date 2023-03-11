@@ -47,17 +47,19 @@ router.put('/update/:id', (req, res) => {
         .then((ingredient) => res.status(201).send(ingredient))
         .catch((err) => {
             console.log(err);
-            res.status(400).json({ error: 'Unable to add ingredient' });
+            res.status(400).json({ error: 'Unable to edit ingredient' });
         });
-})
+});
 
 // @route DELETE api/ingredients/delete/:id
 // @description Delete ingredient
 router.delete('/delete/:id', (req, res) => {
-    Ingredient.findByIdAndDelete(req.params.id).then((ingredient) => res.status(200).send(ingredient)).catch((err) => {
-        console.log(err)
-        res.status(404).json({error: "Ingredient not found"})
-    })
-})
+    Ingredient.findByIdAndDelete(req.params.id)
+        .then((ingredient) => res.status(200).send(ingredient))
+        .catch((err) => {
+            console.log(err);
+            res.status(404).json({ error: 'Ingredient not found' });
+        });
+});
 
 module.exports = router;
